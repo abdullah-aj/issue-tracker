@@ -20,7 +20,8 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "global/*": ["./app/components/global/*"]
+      "global/*": ["./app/components/global/*"],
+      "validationSchemas/*": ["./app/validationSchemas/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
