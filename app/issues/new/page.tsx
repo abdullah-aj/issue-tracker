@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Callout, Text, TextField } from "@radix-ui/themes";
+import { Button, Callout, TextField } from "@radix-ui/themes";
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 
@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { createIssueSchema } from "@/app/validationSchemas/createIssueSchema";
 
 import { z } from "zod";
+import { ErrorMessage } from "@/app/components/errorMessage/ErrorMessage";
 
 type IssueForm = z.infer<typeof createIssueSchema>;
 
@@ -54,11 +55,7 @@ const NewIssuePage = () => {
       )}
       <form onSubmit={handleSubmit(formSubmitHandler)} className=" space-y-2">
         <TextField.Root placeholder="Title" {...register("title")} />
-        {errors.title && (
-          <Text as="p" color="red">
-            {errors.title.message}
-          </Text>
-        )}
+        {errors.title && <ErrorMessage>{errors.title?.message}</ErrorMessage>}
         <Controller
           name="description"
           control={control}
@@ -67,9 +64,7 @@ const NewIssuePage = () => {
           )}
         />
         {errors.description && (
-          <Text as="p" color="red">
-            {errors.description.message}
-          </Text>
+          <ErrorMessage>{errors.description?.message}</ErrorMessage>
         )}
 
         <Button type="submit">Submit New Issue</Button>
