@@ -1,3 +1,49 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["@typescript-eslint", "prettier", "simple-import-sort", "typescript-sort-keys"],
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "@typescript-eslint/no-empty-function": "error",
+    "@typescript-eslint/no-empty-interface": "error",
+    "@typescript-eslint/no-unused-vars": "error",
+    "react/no-unknown-property": [1, { "ignore": ["class"] }],
+    "eqeqeq": ["warn"],
+    "no-alert": 2,
+    "no-console": 0,
+    "no-else-return": "error",
+    "no-duplicate-imports": 2,
+    "prettier/prettier": [
+      "error",
+      {
+        "bracketSpacing": true,
+        "bracketSameLine": false,
+        "jsxSingleQuote": false,
+        "arrowParens": "avoid",
+        "printWidth": 120,
+        "semi": false,
+        "singleQuote": true,
+        "tabWidth": 2,
+        "trailingComma": "none",
+        "useTabs": false,
+        "endOfLine": "auto"
+      }
+    ],
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          ["^@?\\w"], // NPM Packages
+          ["^(pages|stores|global|types|utils|apis|queries)(/.*|$)"], // Alias imports
+          ["^\\."] // Anything that starts with a dot
+        ]
+      }
+    ]
+  }
 }
