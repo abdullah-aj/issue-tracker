@@ -3,11 +3,11 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Callout, TextField } from '@radix-ui/themes'
 import axios from 'axios'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { MdError } from 'react-icons/md'
-import SimpleMDE from 'react-simplemde-editor'
 import { createIssueSchema } from 'validationSchemas/createIssueSchema'
 import { z } from 'zod'
 
@@ -15,6 +15,8 @@ import { ErrorMessage } from 'global/ErrorMessage'
 import { Spinner } from 'global/Spinner'
 
 import 'easymde/dist/easymde.min.css'
+
+const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false })
 
 type IssueForm = z.infer<typeof createIssueSchema>
 
