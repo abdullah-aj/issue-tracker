@@ -1,6 +1,6 @@
 import { Card, Flex, Heading, Text } from '@radix-ui/themes'
+import delay from 'delay'
 import { notFound } from 'next/navigation'
-import React from 'react'
 import ReactMarkdown from 'react-markdown'
 
 import { IssueStatusBadge } from '@/app/components/IssueStatusBadge'
@@ -11,6 +11,7 @@ type Props = {
 }
 
 const IssueDetailPage = async ({ params }: Props) => {
+  await delay(2000)
   try {
     const issue = await prisma.issue.findUnique({
       where: { id: parseInt(params.id) }
