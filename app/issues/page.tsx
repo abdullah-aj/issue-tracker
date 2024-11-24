@@ -1,8 +1,8 @@
 import { Table } from '@radix-ui/themes'
 import delay from 'delay'
-import Link from 'next/link'
 import React from 'react'
 
+import { Link } from '../components/global/Link'
 import { IssueStatusBadge } from '../components/IssueStatusBadge'
 import { IssueActions } from './components/IssueActions'
 
@@ -29,6 +29,7 @@ const IssuesPage = async () => {
             <Table.Row key={`issue-row-${issue.id}`}>
               <Table.Cell>
                 <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
+
                 <div className="block md:hidden">
                   <IssueStatusBadge status={issue.status} />
                 </div>
