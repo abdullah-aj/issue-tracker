@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google'
 import { NavBar } from 'global/NavBar'
 
 import '@radix-ui/themes/styles.css'
+import 'react-loading-skeleton/dist/skeleton.css'
 import './theme-config.css'
 import './globals.css'
 
