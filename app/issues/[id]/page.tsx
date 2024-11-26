@@ -1,8 +1,8 @@
 import { Box, Grid } from '@radix-ui/themes'
 import { notFound } from 'next/navigation'
 
-import { EditIssueButton } from './components/EditIssueButton'
-import IssueDetails from './components/IssueDetails'
+import { EditIssueButton } from './_components/EditIssueButton'
+import IssueDetails from './_components/IssueDetails'
 
 import prisma from '@/prisma/client'
 
