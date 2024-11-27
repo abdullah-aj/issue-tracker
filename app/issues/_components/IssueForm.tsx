@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { MdError } from 'react-icons/md'
-import { createIssueSchema } from 'validationSchemas/createIssueSchema'
+import { createIssueSchema } from '@/app/validationSchemas/issueSchemas'
 import { z } from 'zod'
 
 import { ErrorMessage } from 'global/ErrorMessage'
