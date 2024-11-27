@@ -2,13 +2,13 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Issue } from '@prisma/client'
-import { Box, Button, Callout, Text, TextField } from '@radix-ui/themes'
+import { Button, Callout, TextField } from '@radix-ui/themes'
 import axios from 'axios'
-import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { MdError } from 'react-icons/md'
+import SimpleMDE from 'react-simplemde-editor'
 import { z } from 'zod'
 
 import { ErrorMessage } from 'global/ErrorMessage'
@@ -16,15 +16,6 @@ import { Spinner } from 'global/Spinner'
 
 import 'easymde/dist/easymde.min.css'
 import { issueSchema } from '@/app/validationSchemas/issueSchemas'
-
-const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
-  ssr: false,
-  loading: () => (
-    <Box>
-      <Text>Loading Editor...</Text>
-    </Box>
-  )
-})
 
 type IssueFormData = z.infer<typeof issueSchema>
 
