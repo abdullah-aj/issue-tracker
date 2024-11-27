@@ -2,24 +2,31 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Issue } from '@prisma/client'
-import { Button, Callout, TextField } from '@radix-ui/themes'
+import { Box, Button, Callout, Text, TextField } from '@radix-ui/themes'
 import axios from 'axios'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { MdError } from 'react-icons/md'
-import { createIssueSchema } from '@/app/validationSchemas/issueSchemas'
 import { z } from 'zod'
 
 import { ErrorMessage } from 'global/ErrorMessage'
 import { Spinner } from 'global/Spinner'
 
 import 'easymde/dist/easymde.min.css'
+import { issueSchema } from '@/app/validationSchemas/issueSchemas'
 
-const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false })
+const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
+  ssr: false,
+  loading: () => (
+    <Box>
+      <Text>Loading Editor...</Text>
+    </Box>
+  )
+})
 
-type IssueFormData = z.infer<typeof createIssueSchema>
+type IssueFormData = z.infer<typeof issueSchema>
 
 type Props = {
   issue?: Issue
@@ -35,12 +42,16 @@ const IssueForm = ({ issue }: Props) => {
     handleSubmit,
     formState: { errors, isSubmitting, isLoading }
   } = useForm<IssueFormData>({
-    resolver: zodResolver(createIssueSchema)
+    resolver: zodResolver(issueSchema)
   })
 
   const formSubmitHandler = async (data: IssueFormData) => {
     try {
-      await axios.post('/api/issues', data)
+      if (issue) {
+        await axios.patch(`/api/issues/${issue.id}`, data)
+      } else {
+        await axios.post('/api/issues', data)
+      }
       navigation.push('/')
     } catch (error: unknown) {
       console.log(error)
@@ -76,7 +87,7 @@ const IssueForm = ({ issue }: Props) => {
         {errors.description && <ErrorMessage>{errors.description?.message}</ErrorMessage>}
 
         <Button disabled={isSubmitting || isLoading} type="submit">
-          {isSubmitting || isLoading ? <Spinner /> : 'Submit New Issue'}
+          {isSubmitting || isLoading ? <Spinner /> : issue ? 'Update Issue' : 'Add New Issue'}
         </Button>
       </form>
     </div>
