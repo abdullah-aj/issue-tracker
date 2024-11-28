@@ -10,7 +10,7 @@ type Props = {
 const EditIssueButton = ({ issueId }: Props) => {
   return (
     <Button asChild={true}>
-      <Link href={`/issues/${issueId}/edit`}>
+      <Link href={`/issues/edit/${issueId}`}>
         <BsPencilSquare />
         Edit Issue
       </Link>

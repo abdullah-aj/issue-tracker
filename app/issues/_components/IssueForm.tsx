@@ -43,7 +43,7 @@ const IssueForm = ({ issue }: Props) => {
       } else {
         await axios.post('/api/issues', data)
       }
-      navigation.push('/issues')
+      navigation.push('/issues/list')
       navigation.refresh()
     } catch (error: unknown) {
       console.log(error)
