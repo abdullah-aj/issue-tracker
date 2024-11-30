@@ -2,7 +2,7 @@ import { Container, Theme } from '@radix-ui/themes'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
-import { NavBar } from 'global/NavBar'
+import { NavBar } from 'global/NavBar/'
 
 import { Provider as AuthProvider } from './auth/Provider'
 
