@@ -4,6 +4,8 @@ import { Inter } from 'next/font/google'
 
 import { NavBar } from 'global/NavBar'
 
+import { Provider as AuthProvider } from './auth/Provider'
+
 import '@radix-ui/themes/styles.css'
 import 'react-loading-skeleton/dist/skeleton.css'
 import './theme-config.css'
@@ -27,14 +29,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable}`}>
-        <Theme accentColor="blue" radius="small">
-          <NavBar />
-          <main className="p-5">
-            <Container>{children}</Container>
-          </main>
-        </Theme>
-      </body>
+      <AuthProvider>
+        <body className={`${inter.variable}`}>
+          <Theme accentColor="blue" radius="small">
+            <NavBar />
+            <main className="p-5">
+              <Container>{children}</Container>
+            </main>
+          </Theme>
+        </body>
+      </AuthProvider>
     </html>
   )
 }
