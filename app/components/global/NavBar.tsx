@@ -27,8 +27,8 @@ const NavBar = () => {
   ]
 
   return (
-    <Container>
-      <nav className="border-b mb-5 px-5 py-3">
+    <nav className="border-b mb-5 px-5 py-3">
+      <Container>
         <Flex justify={'between'}>
           <Flex align={'center'} gap={'3'}>
             <Link href={'/'}>
@@ -70,8 +70,8 @@ const NavBar = () => {
             {status === 'unauthenticated' && <Link href="/api/auth/signin">Login</Link>}
           </Box>
         </Flex>
-      </nav>
-    </Container>
+      </Container>
+    </nav>
   )
 }
 
