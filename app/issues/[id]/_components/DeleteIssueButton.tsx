@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { FaRegTrashAlt } from 'react-icons/fa'
 
-import { Spinner } from '@/app/components/global'
+import { Spinner } from '@/app/components'
 
 type Props = {
   issueId: number

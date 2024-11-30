@@ -11,10 +11,8 @@ import { MdError } from 'react-icons/md'
 import SimpleMDE from 'react-simplemde-editor'
 import { z } from 'zod'
 
-import { ErrorMessage } from 'global/ErrorMessage'
-import { Spinner } from 'global/Spinner'
-
 import 'easymde/dist/easymde.min.css'
+import { ErrorMessage, Spinner } from '@/app/components'
 import { issueSchema } from '@/app/validationSchemas/issueSchemas'
 
 type IssueFormData = z.infer<typeof issueSchema>
