@@ -2,12 +2,13 @@ import { Avatar, Box, DropdownMenu, Text } from '@radix-ui/themes'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 import React from 'react'
+import Skeleton from 'react-loading-skeleton'
 
 const UserDropdown = () => {
   const { data: session, status } = useSession()
 
   if (status === 'loading') {
-    return null
+    return <Skeleton width={'3rem'} />
   }
 
   if (status === 'unauthenticated') {
