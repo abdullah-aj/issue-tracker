@@ -27,6 +27,7 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  Issue     Issue[]
 }
 
 model Account {
@@ -90,12 +91,14 @@ model Authenticator {
 }
 
 model Issue {
-  id          Int      @id @default(autoincrement())
-  title       String   @db.VarChar(255)
-  description String   @db.Text
-  status      Status   @default(OPEN)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id             Int      @id @default(autoincrement())
+  title          String   @db.VarChar(255)
+  description    String   @db.Text
+  status         Status   @default(OPEN)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  assignedUserId String?  @db.VarChar(255)
+  assignedToUser User?    @relation(fields: [assignedUserId], references: [id])
 }
 
 enum Status {
