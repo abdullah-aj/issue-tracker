@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
 import { Provider as AuthProvider } from './auth/Provider'
+import { QueryClientProvider } from './queries/QueryClientProvider'
 
 import '@radix-ui/themes/styles.css'
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -28,16 +29,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <AuthProvider>
-        <body className={`${inter.variable}`}>
-          <Theme accentColor="blue" radius="small">
-            <NavBar />
-            <main className="p-5">
-              <Container>{children}</Container>
-            </main>
-          </Theme>
-        </body>
-      </AuthProvider>
+      <body className={`${inter.variable}`}>
+        <AuthProvider>
+          <QueryClientProvider>
+            <Theme accentColor="blue" radius="small">
+              <NavBar />
+              <main className="p-5">
+                <Container>{children}</Container>
+              </main>
+            </Theme>
+          </QueryClientProvider>
+        </AuthProvider>
+      </body>
     </html>
   )
 }
