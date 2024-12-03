@@ -3,7 +3,7 @@ import { Card, Flex, Heading, Text } from '@radix-ui/themes'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 
-import { IssueStatusBadge } from '@/app/components/IssueStatusBadge'
+import { IssueStatusBadge } from '@/app/components'
 
 type Props = {
   issue: Issue

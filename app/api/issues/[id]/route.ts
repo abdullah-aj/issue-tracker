@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getServerSession } from 'next-auth'
 
-import { issueSchema } from '@/app/validationSchemas/issueSchemas'
+import AuthOptions from '@/app/auth/AuthOptions'
+import { patchIssueSchema } from '@/app/validationSchemas/issueSchemas'
 import prisma from '@/prisma/client'
 
 type Props = {
@@ -10,13 +12,33 @@ type Props = {
 }
 
 export async function PATCH(request: NextRequest, { params }: Props) {
+  const session = await getServerSession(AuthOptions)
+  if (!session) {
+    return NextResponse.json({}, { status: 401 })
+  }
+
   const body = await request.json()
-  const validation = issueSchema.safeParse(body)
+
+  const validation = patchIssueSchema.safeParse(body)
   if (!validation.success) {
     return NextResponse.json(validation.error.format(), { status: 400 })
   }
 
+  const { assignedUserId, title, description } = body
+
   try {
+    if (assignedUserId) {
+      const user = await prisma.user.findUnique({
+        where: {
+          id: assignedUserId
+        }
+      })
+
+      if (!user) {
+        return NextResponse.json({ error: 'Invalid User' }, { status: 400 })
+      }
+    }
+
     const issue = await prisma.issue.findUnique({
       where: {
         id: parseInt(params.id)
@@ -32,18 +54,23 @@ export async function PATCH(request: NextRequest, { params }: Props) {
         id: issue.id
       },
       data: {
-        title: body.title,
-        description: body.description
+        title,
+        description,
+        assignedUserId
       }
     })
 
-    return NextResponse.json(updatedIssue, { status: 200 })
+    return NextResponse.json({ updatedIssue }, { status: 200 })
   } catch (error) {
     return NextResponse.json(error, { status: 400 })
   }
 }
 
 export async function DELETE(request: NextRequest, { params }: Props) {
+  const session = await getServerSession(AuthOptions)
+  if (!session) {
+    return NextResponse.json({}, { status: 401 })
+  }
   try {
     const issue = await prisma.issue.findUnique({
       where: {

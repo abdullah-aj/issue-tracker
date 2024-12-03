@@ -1,11 +1,12 @@
 'use client'
 
-import { Spinner } from '@/app/components/global'
-import { AlertDialog, Button, Flex, Link } from '@radix-ui/themes'
+import { AlertDialog, Button, Flex } from '@radix-ui/themes'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { FaRegTrashAlt } from 'react-icons/fa'
+
+import { Spinner } from '@/app/components'
 
 type Props = {
   issueId: number
@@ -34,7 +35,8 @@ const DeleteIssueButton = ({ issueId }: Props) => {
       <AlertDialog.Root>
         <AlertDialog.Trigger>
           <Button color="red" disabled={isDeleting} style={{ cursor: 'pointer' }}>
-            {isDeleting ? <Spinner /> : [<FaRegTrashAlt />, ' Delete Issue']}
+            <FaRegTrashAlt /> Delete Issue
+            {isDeleting && <Spinner />}
           </Button>
         </AlertDialog.Trigger>
         <AlertDialog.Content>
