@@ -28,9 +28,9 @@ export async function PATCH(request: NextRequest, { params }: Props) {
 
   try {
     if (assignedUserId) {
-      const user = await prisma.issue.findUnique({
+      const user = await prisma.user.findUnique({
         where: {
-          id: parseInt(assignedUserId)
+          id: assignedUserId
         }
       })
 
@@ -60,7 +60,7 @@ export async function PATCH(request: NextRequest, { params }: Props) {
       }
     })
 
-    return NextResponse.json(updatedIssue, { status: 200 })
+    return NextResponse.json({ updatedIssue }, { status: 200 })
   } catch (error) {
     return NextResponse.json(error, { status: 400 })
   }
