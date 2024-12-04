@@ -37,7 +37,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
 
   return (
     <div>
-      <IssueActions selectedStatus={searchParams?.status} />
+      <IssueActions />
       <Table.Root variant="surface">
         <Table.Header>
           <Table.Row>
