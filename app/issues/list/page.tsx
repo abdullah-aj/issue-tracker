@@ -3,7 +3,7 @@ import { Table } from '@radix-ui/themes'
 import NextLink from 'next/link'
 import { IoMdArrowDropup } from 'react-icons/io'
 
-import { IssueStatusBadge, Link } from '@/app/components'
+import { IssueStatusBadge, Link, Pagination } from '@/app/components'
 import { IssueActions } from '@/app/issues/_components/IssueActions'
 import prisma from '@/prisma/client'
 
@@ -11,6 +11,7 @@ type Props = {
   searchParams: {
     status: Status
     orderBy: keyof Issue
+    page: string
   }
 }
 
@@ -28,11 +29,20 @@ const IssuesPage = async ({ searchParams }: Props) => {
     ? { [searchParams.orderBy]: 'asc' }
     : undefined
 
+  const page = searchParams?.page ? parseInt(searchParams?.page) : 1
+  const pageSize = 10
+
+  const where = { status }
+
   const issues = await prisma.issue.findMany({
-    where: {
-      status
-    },
-    orderBy
+    where,
+    orderBy,
+    skip: (page - 1) * pageSize,
+    take: pageSize
+  })
+
+  const issueCount = await prisma.issue.count({
+    where
   })
 
   return (
@@ -73,6 +83,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
           ))}
         </Table.Body>
       </Table.Root>
+      <Pagination currentPage={page} pageSize={pageSize} itemCount={issueCount} />
     </div>
   )
 }
