@@ -1,11 +1,5 @@
-import { Pagination } from './components'
+import { LatestIssues, Pagination } from './components'
 
-type Props = {
-  searchParams: {
-    page: string
-  }
-}
-
-export default function Home({ searchParams }: Props) {
-  return <Pagination currentPage={parseInt(searchParams.page)} itemCount={20} pageSize={5} />
+export default function Home() {
+  return <LatestIssues />
 }
