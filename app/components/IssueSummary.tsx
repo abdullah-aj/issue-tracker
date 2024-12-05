@@ -21,9 +21,9 @@ const IssueSummary = ({ close, inProgress, open }: Props) => {
   ]
 
   return (
-    <Flex gap={'4'}>
+    <div className="flex md:justify-start lg:justify-between gap-4">
       {StatusCards.map(statusCard => (
-        <Card key={``}>
+        <Card key={`card-${statusCard.label}`}>
           <Flex direction={'column'} gap={'1'}>
             <Link className="text-sm font-medium" href={`/issues/list?status=${statusCard.status}`}>
               {statusCard.label}
@@ -34,7 +34,7 @@ const IssueSummary = ({ close, inProgress, open }: Props) => {
           </Flex>
         </Card>
       ))}
-    </Flex>
+    </div>
   )
 }
 
