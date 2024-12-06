@@ -21,6 +21,7 @@ export default async function Home() {
       status: 'IN_PROGRESS'
     }
   })
+  
 
   return (
     <Grid columns={{ initial: '1', md: '2' }} gap={'5'}>
