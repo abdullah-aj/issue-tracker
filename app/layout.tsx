@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable}`}>
+      <body className={`${inter.variable}`} suppressHydrationWarning={true}>
         <AuthProvider>
           <QueryClientProvider>
             <Theme accentColor="blue" radius="small">
