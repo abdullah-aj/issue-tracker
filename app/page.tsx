@@ -1,7 +1,9 @@
 import { Flex, Grid } from '@radix-ui/themes'
-import { LatestIssues, IssueSummary, IssueChart } from './components'
-import prisma from '@/prisma/client'
 import { Metadata } from 'next'
+
+import { IssueChart, IssueSummary, LatestIssues } from './components'
+
+import prisma from '@/prisma/client'
 
 export default async function Home() {
   const openCount = await prisma.issue.count({
@@ -21,7 +23,6 @@ export default async function Home() {
       status: 'IN_PROGRESS'
     }
   })
-  
 
   return (
     <Grid columns={{ initial: '1', md: '2' }} gap={'5'}>
