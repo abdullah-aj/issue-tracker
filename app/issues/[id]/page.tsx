@@ -9,18 +9,23 @@ import IssueDetails from './_components/IssueDetails'
 
 import AuthOptions from '@/app/auth/AuthOptions'
 import prisma from '@/prisma/client'
+import { cache } from 'react'
 
 type Props = {
   params: { id: string }
 }
 
+const fetchIssue = cache((issueId: number) =>
+  prisma.issue.findUnique({
+    where: { id: issueId }
+  })
+)
+
 const IssueDetailPage = async ({ params }: Props) => {
   const session = await getServerSession(AuthOptions)
 
   try {
-    const issue = await prisma.issue.findUnique({
-      where: { id: parseInt(params.id) }
-    })
+    const issue = await fetchIssue(parseInt(params.id))
 
     if (!issue) {
       notFound()
@@ -47,3 +52,20 @@ const IssueDetailPage = async ({ params }: Props) => {
 }
 
 export default IssueDetailPage
+
+export async function generateMetadata({ params }: Props) {
+  try {
+    const issue = await fetchIssue(parseInt(params.id))
+
+    return {
+      title: issue?.title,
+      description: `Details of Issue: ${issue?.id}`
+    }
+  } catch (error) {
+    console.log(error)
+    return {
+      title: 'Issue Tracker - Issue Detail',
+      description: 'Issue detail page'
+    }
+  }
+}
