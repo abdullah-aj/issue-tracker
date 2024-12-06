@@ -4,11 +4,11 @@ import { Inter } from 'next/font/google'
 import { Provider as AuthProvider } from './auth/Provider'
 import { QueryClientProvider } from './queries/QueryClientProvider'
 
-import { NavBar } from '@/app/components'
 import '@radix-ui/themes/styles.css'
 import 'react-loading-skeleton/dist/skeleton.css'
 import './globals.css'
 import './theme-config.css'
+import { NavBar } from '@/app/components'
 
 const inter = Inter({
   subsets: ['latin'],

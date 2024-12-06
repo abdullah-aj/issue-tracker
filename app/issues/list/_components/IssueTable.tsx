@@ -1,11 +1,10 @@
-import { IssueStatusBadge } from '@/app/components'
 import { Issue, Status } from '@prisma/client'
 import { Table } from '@radix-ui/themes'
-import Link from 'next/link'
+import NextLink from 'next/link'
 import React from 'react'
 import { IoMdArrowDropup } from 'react-icons/io'
 
-import NextLink from 'next/link'
+import { IssueStatusBadge } from '@/app/components'
 
 export type SearchParamsType = {
   status: Status
@@ -41,7 +40,7 @@ const IssueTable = ({ issues, searchParams }: Props) => {
         {issues.map(issue => (
           <Table.Row key={`issue-row-${issue.id}`}>
             <Table.Cell>
-              <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
+              <NextLink href={`/issues/${issue.id}`}>{issue.title}</NextLink>
 
               <div className="block md:hidden">
                 <IssueStatusBadge status={issue.status} />

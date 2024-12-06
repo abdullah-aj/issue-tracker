@@ -1,6 +1,7 @@
 import { Box, Flex, Grid } from '@radix-ui/themes'
 import { notFound } from 'next/navigation'
 import { getServerSession } from 'next-auth'
+import { cache } from 'react'
 
 import { AssigneeSelect } from './_components/AssigneeSelect'
 import { DeleteIssueButton } from './_components/DeleteIssueButton'
@@ -9,7 +10,6 @@ import IssueDetails from './_components/IssueDetails'
 
 import AuthOptions from '@/app/auth/AuthOptions'
 import prisma from '@/prisma/client'
-import { cache } from 'react'
 
 type Props = {
   params: { id: string }

@@ -1,11 +1,12 @@
 import { Status } from '@prisma/client'
+import { Flex } from '@radix-ui/themes'
+import { Metadata } from 'next'
+
+import { ColumnNames, IssueTable, SearchParamsType } from './_components/IssueTable'
 
 import { Pagination } from '@/app/components'
 import { IssueActions } from '@/app/issues/_components/IssueActions'
 import prisma from '@/prisma/client'
-import { ColumnNames, IssueTable, SearchParamsType } from './_components/IssueTable'
-import { Flex } from '@radix-ui/themes'
-import { Metadata } from 'next'
 
 type Props = {
   searchParams: SearchParamsType
